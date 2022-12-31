@@ -38,7 +38,7 @@ def ajudge():
     global a
     a = int(data['score'])
     global num
-    with mydb.commit() as conn:
+    with mydb.connect() as conn:
         num = conn.execute("select No from score order by no desc limit 1")
         conn.execute("insert into score(No, A) values (%s, %s)", (num[0] + 1, a))
         conn.commit()
@@ -50,7 +50,7 @@ def bjudge():
     data = request.get_json()
     global b
 
-    with mydb.commit() as conn:
+    with mydb.connect() as conn:
         b = int(data['score'])
         conn.execute("insert into score(B) values (%s) where No = %s", (b, num[0]+1))
         conn.commit()
@@ -63,7 +63,7 @@ def bjudge():
 @app.route("/result", methods = ["POST","GET"])
 def result():
     if request.method == "POST":
-        with mydb.commit() as conn:
+        with mydb.connect() as conn:
             num = conn.execute("select No from score order by no desc limit 1")
             P1 = int(conn.execute("select A from score where No = %s", (num[0])))
             P2 = int(conn.execute("select B from score where No = %s", (num[0])))

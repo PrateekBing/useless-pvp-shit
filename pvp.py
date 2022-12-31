@@ -42,7 +42,7 @@ def ajudge():
         num = conn.execute("select No from score order by no desc limit 1")
         conn.execute("insert into score(No, A) values (%s, %s)", (num[0] + 1, a))
         conn.commit()
-    return
+    return "ho gaya bc"
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():

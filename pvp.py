@@ -11,10 +11,9 @@ lb = []
 def index():
     return redirect(url_for('result'))
 
-@app.route("/ajudge", methods = ["POST", "GET"])
+@app.route("/ajudge", methods = ["POST"])
 def ajudge():
-    if request.method == "POST":
-        data = request.get_json()
+        #data = request.get_json()
         ahere = 2
         bhere = 1
         return redirect(url_for("result"), a = ahere, b = bhere)

@@ -8,11 +8,13 @@ app = flask.Flask(__name__)
 lb = []
 
 mydb = cn.connect(
-    host = 'IsolatedSoul.mysql.pythonanywhere-services.com'
-    user = 'IsolatedSoul'
-    passwd = 'uselesspvpshit'
+    host = 'IsolatedSoul.mysql.pythonanywhere-services.com',
+    user = 'IsolatedSoul',
+    passwd = 'uselesspvpshit',
     database = 'IsolatedSoul$default'
 )
+
+cursor = mydb.cursor()
 
 a = b = None
 @app.route("/")
@@ -24,32 +26,32 @@ def ajudge():
     data = request.get_json()
     global a
     a = int(data['score'])
-    return redirect(url_for("result"))
+    global num
+    num = cursor.execute("select No from score order by no desc limit 1")
+    cursor.execute("insert into score(No, A) values (%s, %s)", (num[0], a))
+    cursor.commit()
+    return
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
+    time.sleep(3)
     data = request.get_json()
     global b
     b =  int(data["score"])
+    cursor.execute("insert into score (B) values (%s) where No = %s", (b, num))
+    cursor.commit()
     return redirect(url_for("result"))
 
-@app.route("/result", methods = ["POST"])
+@app.route("/result", methods = ["GET"])
 def result():
-    d = 0
-    while d<3:
-        if a != None and b != None:
-            if a > b:
-                return "a"
-            elif a < b:
-                return "b"
-        else:
-            time.sleep(1)
-            d+=1
-    return "0"
-    
-@app.route("/leaderboard")
-def leaderboard():
-    return lb
+    P1 = cursor.execute("select A from score where No = %s", (num))
+    P2 = cursor.execute("select B from score where No = %s", (num))
+    if P1 > P2:
+        return "a"
+    elif P2 < P1:
+        return "b"
+    else:
+        return "d"
 
 if __name__ == "__main__":
     app.run()

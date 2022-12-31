@@ -6,6 +6,10 @@ app = flask.Flask(__name__)
 a = b = None
 lb = []
 
+@app.route("/"):
+def index():
+    return "pvp"
+
 @app.route("/ajudge", methods = ["POST"])
 def ajudge(name, score):
     a = score
@@ -13,7 +17,7 @@ def ajudge(name, score):
     lb.append([naam, a])
     return lb
 
-@app.post("/bjudge", methods = ["POST"])
+@app.route("/bjudge", methods = ["POST"])
 def bjudge(name, score):
     b = score
     naam = name
@@ -21,7 +25,7 @@ def bjudge(name, score):
     return lb
 
 
-@app.get("/result")
+@app.route("/result")
 def result():
     d = 0
     try:
@@ -39,7 +43,7 @@ def result():
         return "0"
 
 
-@app.get("/leaderboard")
+@app.route("/leaderboard")
 def leaderboard():
     return lb
 

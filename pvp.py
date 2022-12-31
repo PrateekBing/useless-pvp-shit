@@ -14,7 +14,7 @@ def index():
 @app.route("/ajudge", methods = ["POST"])
 def ajudge():
     data = request.get_json()
-    a =  int(data["score"])
+    a =  data["score"]
     return a
 
 @app.route("/bjudge", methods = ["POST"])

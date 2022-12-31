@@ -6,14 +6,19 @@ app = flask.Flask(__name__)
 a = b = None
 lb = []
 
+@app.get("/")
+def home():
+    return "Hello there!"
+
+
 @app.post("/ajudge")
-def judge(name, score):
+def ajudge(name, score):
     a = score
     naam = name
     lb.append([naam, a])
 
 @app.post("/bjudge")
-def judge(name, score):
+def bjudge(name, score):
     b = score
     naam = name
     lb.append([naam, b])

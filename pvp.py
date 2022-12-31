@@ -28,7 +28,7 @@ def ajudge():
     a = int(data['score'])
     global num
     num = cursor.execute("select No from score order by no desc limit 1")
-    cursor.execute("insert into score(No, A) values (%s, %s)", (num[0], a))
+    cursor.execute("insert into score(No, A) values (%s, %s)", (num[0] + 1, a))
     cursor.commit()
     return
 
@@ -44,8 +44,9 @@ def bjudge():
 
 @app.route("/result", methods = ["GET"])
 def result():
-    P1 = cursor.execute("select A from score where No = %s", (num))
-    P2 = cursor.execute("select B from score where No = %s", (num))
+    num = cursor.execute("select No from score order by no desc limit 1")
+    P1 = cursor.execute("select A from score where No = %s", (num[0]))
+    P2 = cursor.execute("select B from score where No = %s", (num[0]))
     if P1 > P2:
         return "a"
     elif P2 < P1:

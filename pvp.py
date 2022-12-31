@@ -1,4 +1,5 @@
 import flask
+from flask import request
 import time
 
 app = flask.Flask(__name__)
@@ -11,8 +12,9 @@ def index():
     return "pvp"
 
 @app.route("/ajudge", methods = ["POST"])
-def ajudge(score):
-    return score
+def ajudge():
+    data = request.get_json()
+    return data
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge(score):

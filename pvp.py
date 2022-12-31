@@ -9,14 +9,14 @@ lb = []
 
 @app.route("/")
 def index():
-    return redirect(url_for('result'))
+    return "Hello there"
 
 @app.route("/ajudge", methods = ["POST"])
 def ajudge():
         #data = request.get_json()
         ahere = 2
         bhere = 1
-        return redirect(url_for("result"), a = ahere, b = bhere)
+        return redirect(url_for("result"))
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
@@ -24,8 +24,10 @@ def bjudge():
     b =  int(data["score"])
     return
 
-@app.route("/result")
-def result(a, b):
+@app.route("/result", methods = ["POST"])
+def result():
+    a = 1
+    b = 2
     d = 0
     try:
         while d<3:
@@ -46,4 +48,4 @@ def leaderboard():
     return lb
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)

@@ -8,11 +8,16 @@ app = flask.Flask(__name__)
 @app.route("/", methods = ["GET", "POST"])
 def result(b):
     a = int(requests.get("http://"))
-    
+    global winner
     if a > b:
-        return "a"
+        winner = "a"
     else:
-        return "b"
+        winner =  "b"
+    return
+
+@app.route("/winner", methods = ["GET"])
+def winner():
+    return winner
 
 
 

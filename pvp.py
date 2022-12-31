@@ -17,9 +17,9 @@ def ajudge():
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
-    data = request.get.form.get('score', type = int)
+    data = request.get_json()
     b =  data["score"]
-    return b
+    return int(b) > 3
 
 
 @app.route("/result")

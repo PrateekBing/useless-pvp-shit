@@ -42,18 +42,21 @@ def bjudge():
     cursor.commit()
     return redirect(url_for("result"))
 
-@app.route("/result", methods = ["GET"])
+@app.route("/result", methods = ["POST","GET"])
 def result():
-    num = cursor.execute("select No from score order by no desc limit 1")
-    P1 = int(cursor.execute("select A from score where No = %s", (num[0])))
-    P2 = int(cursor.execute("select B from score where No = %s", (num[0])))
-    cursor.commit()
-    if P1 > P2:
-        return "a"
-    elif P2 < P1:
-        return "b"
+    if request.method == "POST":
+        num = cursor.execute("select No from score order by no desc limit 1")
+        P1 = int(cursor.execute("select A from score where No = %s", (num[0])))
+        P2 = int(cursor.execute("select B from score where No = %s", (num[0])))
+        cursor.commit()
+        if P1 > P2:
+            return "a"
+        elif P2 < P1:
+            return "b"
+        else:
+            return "d"
     else:
-        return "d"
+        return "GET Call"
 
 if __name__ == "__main__":
     app.run()

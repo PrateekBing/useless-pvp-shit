@@ -10,10 +10,10 @@ user = 'IsolatedSoul'
 password = 'uselesspvpshit'
 host = 'IsolatedSoul.mysql.pythonanywhere-services.com'
 port = 3306
-database = 'IsolatedSoul$defaul'
+database = 'IsolatedSoul$default'
 
 mydb = create_engine(
-    url="mysql+mysqlconnector://{0}:{1}@{2}:{3}/{4}".format(
+    url="mysql+mysqldb://{0}:{1}@{2}:{3}/{4}".format(
         user, password, host, port, database
     )
 )

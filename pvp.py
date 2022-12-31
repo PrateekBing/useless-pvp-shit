@@ -19,7 +19,8 @@ def ajudge():
 def bjudge():
     data = request.get_json()
     b =  data["score"]
-    return str(int(b) > 3)
+    print int(b)
+    return
 
 
 @app.route("/result")

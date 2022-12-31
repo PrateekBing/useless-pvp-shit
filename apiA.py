@@ -8,7 +8,7 @@ def apiA():
     if flask.request.method == "POST":
         data = request.get_json()
         score = int(data["score"])
-        return str(score)
+        return score
     else:
         return "a"
 

@@ -6,15 +6,15 @@ app = flask.Flask(__name__)
 a = b = None
 lb = []
 
-@app.post("/ajudge")
-def judge(name, score):
+@app.route("/ajudge", methods = ["POST"])
+def ajudge(name, score):
     a = score
     naam = name
     lb.append([naam, a])
     return lb
 
-@app.post("/bjudge")
-def judge(name, score):
+@app.post("/bjudge", methods = ["POST"])
+def bjudge(name, score):
     b = score
     naam = name
     lb.append([naam, b])

@@ -2,17 +2,30 @@ import flask
 from flask import request, redirect, url_for
 import mysql.connector as cn
 import time
+from flask_sqlalchemy import SQLAlchemy
+import sshtunnel
 
 app = flask.Flask(__name__)
 
 lb = []
 
-mydb = cn.connect(
-    host = 'IsolatedSoul.mysql.pythonanywhere-services.com',
-    user = 'IsolatedSoul',
-    passwd = 'uselesspvpshit',
-    database = 'IsolatedSoul$default'
+tunnel = sshtunnel.SSHTunnelForwarder(
+    ('ssh.pythonanywhere.com'), ssh_username='IsolatedSoul', ssh_password='uselesspvpshit',
+    remote_bind_address =('IsolatedSoul.mysql.pythonanywhere-services.com', 3306)
 )
+
+tunnel.start()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://IsolatedSoul:uselesspvpshit@127.0.0.1:{}/IsolatedSoul$default'.format(tunnel.local_bind_port)
+
+# mydb = cn.connect(
+#     host = 'IsolatedSoul.mysql.pythonanywhere-services.com',
+#     user = 'IsolatedSoul',
+#     passwd = 'uselesspvpshit',
+#     database = 'IsolatedSoul$default'
+# )
+
+mydb = SQLAlchemy(app)
 
 cursor = mydb.cursor()
 

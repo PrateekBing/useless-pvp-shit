@@ -1,10 +1,18 @@
 import flask
 from flask import request, redirect, url_for
+import mysql.connector as cn
 import time
 
 app = flask.Flask(__name__)
 
 lb = []
+
+mydb = cn.connect(
+    host = 'IsolatedSoul.mysql.pythonanywhere-services.com'
+    user = 'IsolatedSoul'
+    passwd = 'uselesspvpshit'
+    database = 'IsolatedSoul$default'
+)
 
 a = b = None
 @app.route("/")

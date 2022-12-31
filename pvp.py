@@ -11,18 +11,14 @@ def index():
     return "pvp"
 
 @app.route("/ajudge", methods = ["POST"])
-def ajudge(name, score):
+def ajudge(score):
     a = score
-    naam = name
-    lb.append([naam, a])
-    return lb
+    return a
 
 @app.route("/bjudge", methods = ["POST"])
-def bjudge(name, score):
+def bjudge(score):
     b = score
-    naam = name
-    lb.append([naam, b])
-    return lb
+    return b
 
 
 @app.route("/result")

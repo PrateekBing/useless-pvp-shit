@@ -21,6 +21,7 @@ def ajudge():
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
     data = request.get_json()
+    global b
     b =  int(data["score"])
     return redirect(url_for("result"))
 
@@ -43,4 +44,4 @@ def leaderboard():
     return lb
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()

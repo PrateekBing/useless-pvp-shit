@@ -12,13 +12,13 @@ def home():
 
 
 @app.post("/ajudge")
-def judge(name, score):
+def ajudge(name, score):
     a = score
     naam = name
     lb.append([naam, a])
 
 @app.post("/bjudge")
-def judge(name, score):
+def bjudge(name, score):
     b = score
     naam = name
     lb.append([naam, b])

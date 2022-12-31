@@ -11,8 +11,8 @@ def index():
     return "pvp"
 
 @app.route("/ajudge", methods = ["POST"])
-def ajudge():
-    return "post"
+def ajudge(score):
+    return score
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge(score):

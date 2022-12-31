@@ -4,25 +4,25 @@ import time
 
 app = flask.Flask(__name__)
 
-a = b = None
 lb = []
 
+a = b = None
 @app.route("/")
 def index():
     return "Hello there"
 
 @app.route("/ajudge", methods = ["POST"])
 def ajudge():
-    #data = request.get_json()
-    a = 2
-    b = 1
+    data = request.get_json()
+    global a
+    a = int(data['score'])
     return redirect(url_for("result"))
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
     data = request.get_json()
     b =  int(data["score"])
-    return
+    return redirect(url_for("result"))
 
 @app.route("/result", methods = ["POST"])
 def result():

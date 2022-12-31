@@ -8,9 +8,9 @@ def apiA():
     if flask.request.method == "POST":
         data = request.get_json()
         score = int(data["score"])
-        return
+        return str(score)
     else:
-        return score
+        return "a"
 
 if __name__ == "__main__":
     app.run()

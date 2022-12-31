@@ -6,6 +6,11 @@ app = flask.Flask(__name__)
 a = b = None
 lb = []
 
+@app.get("/")
+def home():
+    return "Hello there!"
+
+
 @app.post("/ajudge")
 def judge(name, score):
     a = score

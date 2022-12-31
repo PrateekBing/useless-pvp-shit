@@ -7,26 +7,7 @@ app = flask.Flask(__name__)
 a = b = None
 lb = []
 
-@app.route("/")
-def index():
-    return redirect(url_for('result'))
-
-@app.route("/ajudge", methods = ["POST"])
-def ajudge():
-    data = request.get_json()
-    a = 2
-    b = 1
-    return redirect(url_for('result'))
-
-@app.route("/bjudge", methods = ["POST"])
-def bjudge():
-    data = request.get_json()
-    b =  int(data["score"])
-    return
-
-
-@app.route("/result")
-def result():
+def result(a, b):
     d = 0
     try:
         while d<3:
@@ -41,6 +22,25 @@ def result():
         return "0"
     except:
         return "0"
+
+@app.route("/")
+def index():
+    return redirect(url_for('result'))
+
+@app.route("/ajudge", methods = ["POST"])
+def ajudge():
+    data = request.get_json()
+    a = 2
+    b = 1
+    return result(a, b)
+
+@app.route("/bjudge", methods = ["POST"])
+def bjudge():
+    data = request.get_json()
+    b =  int(data["score"])
+    return
+
+
 
 
 @app.route("/leaderboard")

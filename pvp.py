@@ -27,8 +27,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://IsolatedSoul:uselesspvpshit@127
 
 mydb = SQLAlchemy(app)
 
-cursor = mydb.cursor()
-
 a = b = None
 @app.route("/")
 def index():

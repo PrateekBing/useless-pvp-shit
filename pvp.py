@@ -13,9 +13,7 @@ def index():
 
 @app.route("/ajudge", methods = ["POST"])
 def ajudge():
-    data = request.get.form.get('score', type = int)
-    a =  data["score"]
-    return a
+    return request.get.form.get('score', type = int)
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():

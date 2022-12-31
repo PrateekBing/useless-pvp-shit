@@ -17,7 +17,7 @@ def ajudge():
     a =  int(data["score"])
     b = 1
     
-    return redirect('http://isolatedsoul.pythonanywhere.com/result')
+    return redirect(url_for('result'))
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():

@@ -40,6 +40,3 @@ def result():
 @app.get("/leaderboard")
 def leaderboard():
     return lb
-
-if __name__ == "__main__":
-    app.run()

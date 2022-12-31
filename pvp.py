@@ -45,8 +45,8 @@ def bjudge():
 @app.route("/result", methods = ["GET"])
 def result():
     num = cursor.execute("select No from score order by no desc limit 1")
-    P1 = cursor.execute("select A from score where No = %s", (num[0]))
-    P2 = cursor.execute("select B from score where No = %s", (num[0]))
+    P1 = int(cursor.execute("select A from score where No = %s", (num[0])))
+    P2 = int(cursor.execute("select B from score where No = %s", (num[0])))
     if P1 > P2:
         return "a"
     elif P2 < P1:

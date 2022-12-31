@@ -1,7 +1,7 @@
-import fastapi
+import flask
 import time
 
-app = fastapi.FastAPI()
+app = flask.Flask(__name__)
 
 a = b = None
 lb = []
@@ -40,3 +40,6 @@ def result():
 @app.get("/leaderboard")
 def leaderboard():
     return lb
+
+if __name__ == "__main__":
+    app.run()

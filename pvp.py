@@ -1,5 +1,5 @@
 import flask
-from flask import request
+from flask import request, redirect
 import time
 
 app = flask.Flask(__name__)
@@ -13,13 +13,16 @@ def index():
 
 @app.route("/ajudge", methods = ["POST"])
 def ajudge():
-    return request.get.form.get('score', type = int)
+    data = request.get_json()
+    a =  int(data["score"])
+    b = 1
+    
+    return redirect('/result')
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
     data = request.get_json()
-    b =  data["score"]
-    print int(b)
+    b =  int(data["score"])
     return
 
 

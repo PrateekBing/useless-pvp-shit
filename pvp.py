@@ -39,4 +39,4 @@ def result():
 
 @app.get("/leaderboard")
 def leaderboard():
-    return lb
+    return "0"

@@ -9,7 +9,7 @@ lb = []
 
 @app.route("/")
 def index():
-    return "pvp"
+    return redirect(url_for('result'))
 
 @app.route("/ajudge", methods = ["POST"])
 def ajudge():

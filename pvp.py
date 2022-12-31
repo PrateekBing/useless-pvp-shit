@@ -15,13 +15,15 @@ def index():
 def ajudge():
     data = request.get_json()
     a =  data["score"]
-    return a
+    i = int(a)
+    return i
 
 @app.route("/bjudge", methods = ["POST"])
 def bjudge():
     data = request.get_json()
-    b =  int(data["score"])
-    return b
+    b =  data["score"]
+    i = int(b)
+    return i
 
 
 @app.route("/result")

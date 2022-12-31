@@ -1,5 +1,5 @@
 import flask
-from flask import request, redirect
+from flask import request, redirect, url_for
 import time
 
 app = flask.Flask(__name__)
@@ -16,7 +16,6 @@ def ajudge():
     data = request.get_json()
     a = 2
     b = 1
-    
     return redirect(url_for('result'))
 
 @app.route("/bjudge", methods = ["POST"])

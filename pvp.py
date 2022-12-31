@@ -6,7 +6,7 @@ app = flask.Flask(__name__)
 a = b = None
 lb = []
 
-@app.route("/"):
+@app.route("/")
 def index():
     return "pvp"
 

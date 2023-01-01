@@ -1,10 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import { useTimer,    start,
-    pause,
-    resume,
-    restart,
- } from 'react-timer-hook';
+import axios from "axios";
+
 
 const organObj = [
     {organ: "Nose", icon: "images/nose.png"},
@@ -28,18 +25,41 @@ function GameViewer() {
     
     const [screen, setScreen] = useState(0);
     const [returnObj, setReturnObj] = useState({organObj: {icon: "images/amogus.png"}});
+    const [score, setScore] = useState(0)
 
-    const [time, setTime] = useState(new Date())
-    const {seconds} = useTimer({expiryTimestamp : time.getSeconds() , onExpire: () => console.log("expiry")})
+    const [sec, setSec] =  useState()
 
+    console.log(sec);
     useEffect(() => {
         if (screen > 0) {
             const rando = randomOutuputGen()
             console.log(rando);
             setReturnObj(rando)
+            setScore(score + 1)
         }
     }, [screen]);
-    console.log(seconds);
+
+    console.log(score);
+    
+    useEffect(() => {
+        setTimeout(() => {
+            if (sec > 0){
+                console.log(sec);
+                setSec(sec - 1)
+            }
+            if (sec === 0) {
+                alert("Times Up, Validating your results")
+                
+            axios.post('https://IsolatedSoul.pythonanywhere.com/score', {
+                'score': score.toString(),
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+                        }
+        }, 1000);
+    }, [sec]);
+
     const handleKeydown = event => {
         console.log(event.key);
         if (event.key.toLowerCase() === returnObj.alphabet.toLowerCase()) {
@@ -48,14 +68,13 @@ function GameViewer() {
     }
 
     const initHandler = () => {
-        if (screen<1){
+        if (screen < 1){
             setScreen(1)
-            setTime(new Date())
-            time.setSeconds(time.getSeconds() + 21)
-            restart(time)
+           setSec(21)
         }
     }
-    console.log()
+
+    
     return (
     <div  tabIndex={0} onClick={initHandler} onKeyDown={handleKeydown} 
          className='outline-none flex w-screen justify-center'>
@@ -64,7 +83,7 @@ function GameViewer() {
         {/* Top Navbar */}
         <div className='flex h-[5vh] bg-black flex-row items-center px-4 justify-between'>
             <img className='w-12' src="images/tray.svg" />
-            <p className='text-white font-ibm-plex-mono'>21 SECONDS</p>
+            <p className='text-white font-ibm-plex-mono'>{sec ? sec : '21'} SECONDS</p>
             <img className='w-6' src="images/plusicon.svg" />
         </div>
 
@@ -72,13 +91,13 @@ function GameViewer() {
             
         <div className='conditional-img h-full flex z-10 items-center justify-center'>
             <div className='w-full flex flex-col items-center h-full justify-center'>
-                <h3 className='font-press-start-2p flex text-white'>enter a candy</h3>
+                <h3 className='font-press-start-2p flex animate-flicker text-white'>enter a candy</h3>
                 <img src="images/Intro.png" className=' w-1/2' />
             </div>
         </div>
         ) : (
             <div className='flex h-full items-center bg-white justify-center shadow-none'>
-                <h1 className='font-black text-[200px] font-press-start-2p shadow-md'>{returnObj.alphabet}</h1>
+                <h1 className='font-black text-[200px] font-press-start-2p'>{returnObj.alphabet}</h1>
             </div>
         )}  
         <div>

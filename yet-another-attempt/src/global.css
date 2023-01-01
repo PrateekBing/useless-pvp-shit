@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=SF+Alien+Encounters:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply leading-[normal] m-0;
+  overflow: hidden;
+}
+
+.main-content-box {
+    filter: drop-shadow(8px 8px 0 rgb(0, 0, 0));
+}
+.conditional-img {
+  background-image: url('../public/images/image-14@2x.png');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+  transform: translateY(-2rem);
+}
